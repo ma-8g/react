@@ -13,17 +13,17 @@
     <div id="root"></div>
     <script type="text/babel">
         (()=>{
-            const vName = 'Alex';
-            function showMessage(){
-                alert('Hello');
+            //コンポーネントを関数で作成
+            //returnに<div>で囲ったコンポーネントを作成する。
+            function Counter(){
+                return <div>0</div>
             }
+
             ReactDOM.render(
-//                <div className="box">
-//                    <p>Hello! {vName.toUpperCase()}</p>
-//                </div>
-                <div style={{width:100, height:100, backgroundColor:'tomato'}}
-                onClick={showMessage}></div>
-                ,document.getElementById('root')
+                //コンポーネントの1文字目は大文字
+                <Counter/>
+
+            ,document.getElementById('root')
             );
         })();
     </script>
