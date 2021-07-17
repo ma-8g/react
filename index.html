@@ -13,49 +13,43 @@
   <script type="text/babel">
     (() => {
 
-      class Counter extends React.Component {
-        constructor(props) {
-          super(props);
+      function Counter(props) {
+        return (
+          <li style={{backgroundColor:props.counter.color}}>
+            {props.counter.id}:{props.counter.count}
+          </li>
+        );
+      }
+
+      class App extends React.Component {
+        constructor() {
+          super();
           this.state = {
-            count: 0
+              //配列で管理
+            counters: [
+              {id: 'A', count: 0, color: 'tomato'},
+              {id: 'B', count: 0, color: 'skyblue'},
+              {id: 'C', count: 0, color: 'limegreen'}
+            ]
           };
-          //javaScriptの仕様でthisで値を変更するとエラーになるのでbindが必要らしい
-          this.countUp = this.countUp.bind(this);
         }
-
-        countUp(){
-            //カウントアップ関数。
-            //Reactではstateの値にセットできるのはコンストラクタのみ
-            //stateの値を変更する場合はsetStateを使用する。
-            //
-            //this.sate.countで変更すると意図しない変更となる場合があるので、prevStateを使う。
-            // this.setState({
-            //     count: this.state.count + 1 
-            // })
-            this.setState(prevState => {
-                return {
-                    count: prevState.count + 1
-                };
-            });
-        }
-
         render() {
           return (
-            <li style={{backgroundColor:this.props.color}} onClick={this.countUp}>
-              {this.state.count}
-            </li>
+            <div className="container">
+              <ul>
+                <Counter counter={this.state.counters[0]}/>
+                <Counter counter={this.state.counters[1]}/>
+                <Counter counter={this.state.counters[2]}/>
+              </ul>
+              <div>TOTAL INVENTORY: 3</div>
+            </div>
           );
         }
       }
 
       ReactDOM.render(
-        <div className="container">
-          <ul>
-            <Counter color="tomato"/>
-            <Counter color="skyblue"/>
-            <Counter color="limegreen"/>
-          </ul>
-        </div>,
+          //counter変数をまとめて管理するために<App />タグを作ってクラスで管理する。
+        <App/>,
         document.getElementById('root')
       );
     })();
