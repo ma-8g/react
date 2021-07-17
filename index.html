@@ -17,12 +17,31 @@
         constructor(props) {
           super(props);
           this.state = {
-            count: 10
+            count: 0
           };
+          //javaScriptの仕様でthisで値を変更するとエラーになるのでbindが必要らしい
+          this.countUp = this.countUp.bind(this);
         }
+
+        countUp(){
+            //カウントアップ関数。
+            //Reactではstateの値にセットできるのはコンストラクタのみ
+            //stateの値を変更する場合はsetStateを使用する。
+            //
+            //this.sate.countで変更すると意図しない変更となる場合があるので、prevStateを使う。
+            // this.setState({
+            //     count: this.state.count + 1 
+            // })
+            this.setState(prevState => {
+                return {
+                    count: prevState.count + 1
+                };
+            });
+        }
+
         render() {
           return (
-            <li style={{backgroundColor:this.props.color}}>
+            <li style={{backgroundColor:this.props.color}} onClick={this.countUp}>
               {this.state.count}
             </li>
           );
