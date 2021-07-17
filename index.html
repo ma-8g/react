@@ -13,30 +13,21 @@
   <script type="text/babel">
     (() => {
 
-      // function Counter(props) {
-      //   return <li style={{backgroundColor:props.color}}>0</li>;
-      // }
-
-<<<<<<< HEAD
-            ReactDOM.render(
-                //コンポーネントの1文字目は大文字
-                //コンポーネントに属性を自作できる。属性名をcolorとした
-                <div>
-                <Counter color="tomato"/>
-                <Counter color="blue"/>
-                <Counter color="limegreen"/>
-                </div>
-=======
       class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            count: 10
+          };
+        }
         render() {
           return (
             <li style={{backgroundColor:this.props.color}}>
-              0
+              {this.state.count}
             </li>
           );
         }
       }
->>>>>>> 3761423 (functionからclassに書き換え)
 
       ReactDOM.render(
         <div className="container">
