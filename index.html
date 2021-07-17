@@ -17,7 +17,24 @@
             //returnに<div>で囲ったコンポーネントを作成する。
             //タグで記載した属性をprops引数で受け取ることができる
             function Counter(props){
-                return <div>0 {props.color}</div>
+
+                // function countUp(color){
+                //     alert(color);
+                //}
+                function countUp(e, color){
+                    e.preventDefault(); //e.preventDefault()で画面遷移を防ぐ。
+                    alert(color);
+                }
+                // return (<li style={{backgroundColor:props.color}} onClick={()=>countUp(props.color)}>
+                //     0 
+                //     </li>);
+                    return (
+                        <li style={{backgroundColor:props.color}}>
+                            <a href="#" onClick={ e => countUp(e, props.color)}>
+                            0 
+                            </a>
+                        </li>
+                    );
             }
 
             ReactDOM.render(
