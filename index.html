@@ -21,11 +21,29 @@
         );
       }
 
+      //stateを持たない場合はfunctionで書く。
+      function CounterList(props) {
+          //配列のmapメソッド
+        const counters = props.counters.map(counter => {
+          return (
+            <Counter
+              counter={counter}
+              //配列を表示する場合はkey属性を書くことが義務付けられる
+              key={counter.id}
+            />
+          );
+        });
+        return (
+          <ul>
+            {counters}
+          </ul>
+        );
+      }
+
       class App extends React.Component {
         constructor() {
           super();
           this.state = {
-              //配列で管理
             counters: [
               {id: 'A', count: 0, color: 'tomato'},
               {id: 'B', count: 0, color: 'skyblue'},
@@ -36,11 +54,7 @@
         render() {
           return (
             <div className="container">
-              <ul>
-                <Counter counter={this.state.counters[0]}/>
-                <Counter counter={this.state.counters[1]}/>
-                <Counter counter={this.state.counters[2]}/>
-              </ul>
+              <CounterList counters={this.state.counters}/>
               <div>TOTAL INVENTORY: 3</div>
             </div>
           );
@@ -48,7 +62,6 @@
       }
 
       ReactDOM.render(
-          //counter変数をまとめて管理するために<App />タグを作ってクラスで管理する。
         <App/>,
         document.getElementById('root')
       );
